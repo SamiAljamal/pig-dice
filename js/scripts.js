@@ -20,21 +20,26 @@ Player.prototype.roll= function(roll){
 };
 
 
+
 var player1= new Player(0,0);
 var player2 = new Player(0,0);
 
 $(document).ready(function(){
   playerTurn = 1;
-  $("form#roll").submit(function(event){
-    $("#hold").click(function(){
-      console.log("hold");
-      if(playerTurn === 1){
-      return playerTurn = 0;
+  $("#hold").click(function(){
+    console.log("hold");
+    if(playerTurn === 1){
+      playerTurn = 0;
+      $("body").css("background-color", "blue")
+
     }
-      else {
-        return playerTurn = 1;
-      }
-    });
+    else {
+      playerTurn = 1;
+      $("body").css("background-color", "red")
+    }
+  });
+  $("form#roll").submit(function(event){
+
     //playerTurn = 1;
     if(playerTurn === 1){
       var turn = getRandomRoll();
@@ -45,10 +50,9 @@ $(document).ready(function(){
       event.preventDefault();
 
     } else {
-      playerTurn = 0;
       var turn = getRandomRoll();
       var turnRoll = turn;
-      var turnScore = player1.roll(turn);
+      var turnScore = player2.roll(turn);
       $("h2#show1").text(turnRoll);
       $("h2#p2total").text(turnScore);
       event.preventDefault();
